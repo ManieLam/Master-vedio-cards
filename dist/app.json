@@ -1,0 +1,14 @@
+{
+    "pages": [
+        "pages/home/index/index",
+        "pages/musicList/index/index",
+        "pages/tag/index",
+        "pages/single/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "粤曲天地",
+        "navigationBarTextStyle": "black"
+    }
+}

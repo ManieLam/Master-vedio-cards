@@ -1,0 +1,114 @@
+/* pages/home/index/index.wxss */
+
+@import "../../../component/hSwiper/hSwiper.wxss";
+.home_Section {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+.bgBox {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.home_body {
+    padding: 55rpx 0 190rpx;
+    height: 100%;
+    width: 100%;
+}
+
+.home_footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #f1f1f1;
+    height: 99rpx;
+    padding: 20rpx;
+}
+
+.home_Section .itemSelf {
+    /*height: 100%;*/
+    position: absolute;
+    box-sizing: border-box;
+    /*margin: 0 40rpx;*/
+    border-radius: 5px;
+    overflow: hidden;
+    /*padding: 20rpx;*/
+    box-shadow: 0 0 1px 1px rgba(238, 238, 238, .3);
+    height: 75%;
+    width: 96%;
+    background-color: #f1f1f1;
+    color: #888;
+}
+
+.music-info {
+    padding: 0 20px 15px;
+}
+
+.musicTitle {
+    color: #353535;
+    font-size: 1.32em;
+    font-weight: 600;
+    margin: 28rpx 0;
+    text-align: center;
+}
+
+.ellipsis_line2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.musicDes {
+    margin-bottom: 55rpx;
+    /*font-weight: 600;*/
+}
+
+.musicAuthor {
+    margin-bottom: 32rpx;
+}
+
+.musicControll {
+    margin: 25% auto;
+}
+
+
+/*进度条样式*/
+
+.music-wrap .control {
+    position: absolute;
+    bottom: 135rpx;
+    /*left: 0;*/
+    z-index: 50;
+    /*margin-top: -17px;*/
+    /*height: 178rpx;*/
+    width: 100%;
+}
+
+
+/*.music-wrap .operate-wrap {
+    display: flex;
+    padding: 0 10rpx;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+    height: 48rpx;
+}*/
+
+
+/*.music-wrap .play-list {
+    width: 48rpx;
+    height: 36rpx;
+    background-position: 0 -480px;
+}
+
+.music-wrap .song-like {
+    width: 50rpx;
+    height: 42rpx;
+    background-size: 80rpx 700rpx;
+}*/

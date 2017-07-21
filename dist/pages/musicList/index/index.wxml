@@ -1,0 +1,27 @@
+<!-- pages/musicList/index/index.wxml -->
+<!-- <import src="../../template/musicBar.wxml"  />-->
+<view>
+    <view class="detail_header">
+        <image src="{{playAblumn.thumbnail}}?imageView2/1/w/750/h/250" style="height:414rpx;width:100%;flex:1 1 auto;"></image>
+        <view class="btn-absolute btn-circle icon-btn-start2"  wx:if="{{!playing ||!isCurPlay}}"
+              data-play="{{playing}}" data-id="{{id}}" catchtap="playAblumnList"></view>
+        <view class="btn-absolute btn-circle icon-btn-stop2" wx:if="{{playing && isCurPlay}}" data-play="{{playing}}" data-id="{{id}}" catchtap="stopMusic"></view>
+    </view>
+    <view class="detail_body" bindtap="showAllDes">
+        <view class="musicTitle info_ellipsis">{{playAblumn.title}}</view>
+        <view class="md_fonts col_88 {{showAllDes?'':'desHide'}}">{{playAblumn.excerpt}}</view>
+        <view class="icon-arrows {{showAllDes?'arrows180':''}}" bindtap="showAllDes"></view>
+    </view>
+    <view class="detail_list col_88 md_fonts">
+        <view wx:for="{{playAblumn.song}}" wx:key="item" wx:for-index="index"
+              class="list_item flex flex-between flex-center " data-index="{{index}}" data-url="{{item.URL}}"
+              hover-class="listHover" bindtap="startPlay">
+            <view class="flex flex-grow">
+                <view class="wid20">{{index+1}}</view>
+                <view class="info_ellipsis ">{{item.name ||"歌曲名称" }}</view>
+            </view>
+            <view wx:if="{{playIndex != index ||!isCurPlay}}">{{item.time }}</view>
+            <view wx:else="{{playIndex == index && isCurPlay}}" class="icon icon-melody"></view>
+        </view>
+    </view>
+</view>

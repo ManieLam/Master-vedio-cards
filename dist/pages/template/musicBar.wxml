@@ -1,0 +1,36 @@
+<template name="musicBar">
+    <navigator url="../../musicList/index/index?id={{musicData.playList.id}}" id="{{musicData.playList.id}}" class="flex flex-between flex-cloumn music-bar" hover-class="none"
+          wx:if="{{musicData.playList}}" >
+        <!-- 播放条 无播放音乐是不显示 -->
+        <view class="control">
+            <view class="progress">
+                <!--<view class="current">
+                {{songState.currentPosition}}</view>
+                -->
+                <view class="time-bar">
+                    <view class="time-play" style="transform: translateX({{musicData.songState.progress}}%)"></view>
+                </view>
+                <!--<view class="total">
+                {{songState.duration}}</view>
+                -->
+            </view>
+        </view>
+        <!-- end .control -->
+        <view class="info flex flex-between">
+            <view class="flex flex-center">
+                <image src="{{musicData.playList.thumbnail}}?imageView2/1/w/80/h/80"
+                       style="width:90rpx;height:90rpx;background:#4a485d;margin:0 20rpx"></image>
+                <view class="flex flex-cloumn ">
+                    <view class="col_88 md_fonts">{{musicData.current.name}}</view>
+                    <view class="col_b2 sm_fonts">{{musicData.current.singer||'佚名'}}· {{musicData.playList.title}}</view>
+                </view>
+            </view>
+            <view class="flex flex-center mar_r10">
+                <view class="icon icon-stop icon-mar" wx:if="{{musicData.playing}}" catchtap="stopMusic"></view>
+                <view class="icon icon-start icon-mar" wx:if="{{!musicData.playing}}" data-index="{{musicData.index}}" catchtap="playMusic"></view>
+                <view class="icon icon-next icon-mar" catchtap="playNext"></view>
+            </view>
+        </view>
+        <!-- end footer .info -->
+    </navigator>
+</template>

@@ -1,0 +1,23 @@
+<template name="hSwiperItem">
+	<view class="itemSelf">
+    	{{item}}
+	</view>	
+</template>
+
+<template name="templateb">
+	{{item}}
+</template>
+
+<template name="musicBlock">
+	<view class="itemSelf flex flex-cloumn"  data-id="{{id}}" bindtap="musicDetail" >
+		<image src="{{thumbnail }}?imageView2/1/w/375/h/250" style="height:450rpx;width:100%;"></image>
+    	 <view class="music-info flex flex-cloumn flex-center flex_1">
+			 	<view class="musicTitle info_ellipsis">{{title}}</view>
+				<view class="md_fonts col_88 musicDes ellipsis_line2">{{excerpt}}</view>
+				<!--<view class="sm_fonts col_b2 musicAuthor">by {{author }}</view>-->
+				<view class="btn-circle icon-btn-start2" wx:if="{{!musicData.playing || musicData.playList.id!=id}}" data-play="{{playing}}" data-id="{{id}}" catchtap="playAblumnList" ></view>
+			<view class="btn-circle icon-btn-stop2" wx:if="{{musicData.playing && musicData.playList.id==id}}" data-play="{{playing}}" data-id="{{id}}" catchtap="stopMusic">
+			</view>
+		 </view>
+	</view>	
+</template>
