@@ -42,11 +42,14 @@
 .arrows180 {
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
+    transition: all .3s;
 }
 
 .list_item {
-    line-height: 80rpx;
-    padding: 0 40rpx;
+    line-height: 100rpx;
+    margin: 0 40rpx;
+    position: relative;
+    /*border-bottom: 1rpx solid #dfdfdf;*/
 }
 
 .wid20 {
@@ -56,4 +59,9 @@
 .listHover {
     background: #dedede;
     color: rgba(0, 0, 0, .6);
+}
+
+.detail_list {
+    margin: 0 15px 80rpx;
+    background: #fff
 }

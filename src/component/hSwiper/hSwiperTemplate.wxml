@@ -10,7 +10,7 @@
 
 <template name="musicBlock">
 	<view class="itemSelf flex flex-cloumn"  data-id="{{id}}" bindtap="musicDetail" >
-		<image src="{{thumbnail }}?imageView2/1/w/375/h/250" style="height:450rpx;width:100%;"></image>
+		<image src="{{thumbnail }}" style="height:450rpx;width:100%;"></image>
     	 <view class="music-info flex flex-cloumn flex-center flex_1">
 			 	<view class="musicTitle info_ellipsis">{{title}}</view>
 				<view class="md_fonts col_88 musicDes ellipsis_line2">{{excerpt}}</view>

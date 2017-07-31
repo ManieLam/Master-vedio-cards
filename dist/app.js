@@ -22,9 +22,11 @@ App({
         encryptedData: null,
         iv: null,
         code: null,
+
         playIndex: null,
-        playing: false,
-        ablumn_Playing: null,
-        isPlay_info: null,
+        playData: null,
+        playList: null,
+        playing: null,
+        songState: null,
     }
 })

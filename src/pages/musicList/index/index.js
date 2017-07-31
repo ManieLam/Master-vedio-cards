@@ -1,5 +1,5 @@
 // pages/musicList/index/index.js
-const app = getApp();
+const App = getApp();
 let that;
 const Require = require("../../../utils/Require.js");
 const Util = require("../../../utils/util.js");
@@ -76,14 +76,17 @@ Page({
     //设置播放条数据
     setMusicData() {
         let musicData = MusicCtr.getMusicData();
+        if (!musicData.playList) return;
+
         that.songPlay();
         //判断播放的是否为当前专辑
         let isCurPlay = musicData.playList.id == that.data.id ? true : false;
         //多个页面数据
         that.setData({
             musicData: musicData,
-            playIndex: wx.getStorageSync("playIndex"),
-            playing: wx.getStorageSync("playing"),
+            playIndex: App.globalData.playIndex,
+            // playing: wx.getStorageSync("playing"),
+            playing: App.globalData.playing,
             isCurPlay: isCurPlay,
         })
 

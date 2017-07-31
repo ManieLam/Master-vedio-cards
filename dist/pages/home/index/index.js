@@ -1,5 +1,5 @@
 // pages/home/index/index.js
-const app = getApp();
+const App = getApp();
 let that;
 let hSwiper = require("../../../component/hSwiper/hSwiper.js");
 const Require = require("../../../utils/Require.js");
@@ -129,7 +129,7 @@ Page({
     /* 开始播放 */
     playMusic(e) {
         let index = e ? e.currentTarget.dataset.index : 0;
-        let lists = e ? wx.getStorageSync("playList") : that.data.playAblumn
+        let lists = e ? App.globalData.playList : that.data.playAblumn
         MusicCtr.playMusic({ lists: lists, index: index })
         that.setData({
                 playing: true,
@@ -150,22 +150,20 @@ Page({
     //下一曲
     playNext() {
         MusicCtr.playNext();
-        // that.setData({ playIndex: wx.getStorageSync("playIndex") })
         that.setMusicData()
     },
     //设置播放条数据
     setMusicData() {
         let musicData = MusicCtr.getMusicData();
-        that.songPlay();
-        //判断播放的是否为当前专辑
-        // let isCurPlay = musicData.playList.id == that.data.id ? true : false;
         //多个页面数据
         that.setData({
             musicData: musicData,
-            playIndex: wx.getStorageSync("playIndex"),
-            playing: wx.getStorageSync("playing"),
+            playIndex: App.globalData.playIndex,
+            playing: App.globalData.playing,
             // isCurPlay: isCurPlay,
         })
+        that.songPlay();
+
 
         console.log("musicData::", that.data.musicData);
     },
@@ -223,9 +221,7 @@ Page({
 
         that.setData({ playing: false, "musicData.playing": false })
         wx.setStorageSync("playing", false)
-            // if (wx.getStorageInfo('songState')) {
-            //     that.setData({ isPlay_info: wx.getStorageInfo('songState') })
-            // }
+
     },
     onShow: function() {
         // that.getPlyerState();
@@ -243,9 +239,6 @@ Page({
         }
     },
 
-    // onHide: function() {
-    //     wx.clearStorageSync();
-    // },   
     onPullDownRefresh: function() {
         wx.stopPullDownRefresh()
         console.log("onPullDownRefresh");

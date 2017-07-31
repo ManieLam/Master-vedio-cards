@@ -2,7 +2,7 @@
 <!-- <import src="../../template/musicBar.wxml"  />-->
 <view>
     <view class="detail_header">
-        <image src="{{playAblumn.thumbnail}}?imageView2/1/w/750/h/250" style="height:414rpx;width:100%;flex:1 1 auto;"></image>
+        <image src="{{playAblumn.thumbnail}}" style="height:414rpx;width:100%;flex:1 1 auto;"></image>
         <view class="btn-absolute btn-circle icon-btn-start2"  wx:if="{{!playing ||!isCurPlay}}"
               data-play="{{playing}}" data-id="{{id}}" catchtap="playAblumnList"></view>
         <view class="btn-absolute btn-circle icon-btn-stop2" wx:if="{{playing && isCurPlay}}" data-play="{{playing}}" data-id="{{id}}" catchtap="stopMusic"></view>

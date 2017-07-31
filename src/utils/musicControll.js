@@ -1,8 +1,9 @@
 const Util = require("./util");
+const App = getApp();
 
 /*全局数据*/
 var musicData = {};
-let listobj = 'song';
+
 const musicPlayer = {
     // constructor(props = {}) {
     // },
@@ -12,49 +13,55 @@ const musicPlayer = {
     state: false, //播放状态
     songState: {}, //进度条状态
     /*配置播放数据*/
-    setOption(options = {}) {
-        //数据存本地缓存
-        wx.setStorageSync("playData", options.current || this.current);
-        wx.setStorageSync("playList", options.lists || this.lists);
-        wx.setStorageSync("playing", options.state || this.state);
-        wx.setStorageSync("playIndex", options.index || this.index);
+    setOption({ current, lists, state, index }) {
 
         //全局设置参数
-        options.current ? this.current = options.current : this.current;
-        options.lists ? this.lists = options.lists : this.lists;
-        options.state ? this.state = options.state : this.state;
-        options.index ? this.index = options.index : this.index;
+        current ? this.current = current : this.current;
+        lists ? this.lists = lists : this.lists;
+        state ? this.state = state : this.state;
+        index ? this.index = index : this.index;
+
+        App.globalData = {
+            playIndex: index,
+            playData: current,
+            playList: lists,
+            playing: state
+        }
+
 
     },
     /*获取当前播放条数据*/
     getMusicData() {
-        this.index = wx.getStorageSync("playIndex")
-        this.current = wx.getStorageSync("playData");
-        this.lists = wx.getStorageSync("playList")
-        this.state = wx.getStorageSync("playing")
+
+        let globalData = App.globalData;
         this.songState = wx.getStorageSync("songState"); //记录最终的进度条
 
 
         let musicData = {
-            index: this.index,
-            current: this.current,
-            playList: this.lists,
-            playing: this.state,
-            songState: this.songState,
-            // bookCat:
-        }
+                index: globalData.playIndex,
+                current: globalData.playData,
+                playList: globalData.playList,
+                playing: globalData.playing,
+                songState: this.songState,
+                // bookCat:
+            }
+            // console.log("musicData in get:", musicData);
 
         return musicData
     },
 
     /**
      * 播放
-     * @param  options={lists,index}   {播放书信息 ,播放条目}
+     * @param  options={lists,index}   {播放列表,播放条目}
      * */
     playMusic(options = {}) {
         let lists = options.lists;
         let index = this.index = options.index;
         console.log("playMusic", lists, index);
+        if (!lists.song[index].URL) {
+            wx.showToast({ title: '当前无播放内容', image: '../images/error.svg' })
+            return;
+        }
         wx.playBackgroundAudio({
             dataUrl: lists.song[index].URL,
             title: lists.song[index].name,
@@ -69,19 +76,14 @@ const musicPlayer = {
         wx.getBackgroundAudioPlayerState({ // 小程序播放控制api
             success(res) {
                 let status = res.status;
-                // console.info("stopMusic::", status)
-
                 if (status === 1) { // 正在播放中
-                    console.info("stopMusic1")
+                    // console.info("stopMusic1")
                     wx.pauseBackgroundAudio(); //暂停播放
-                    wx.setStorageSync("playing", false)
+                    App.globalData.playing = false;
 
                 } else if (status === 0) { // 正在暂停中
-                    console.info("stopMusic2")
-
-                    wx.setStorageSync("playing", true)
-
-                    // wx.playBackgroundAudio({ title: playData.name, coverImgUrl: playData.songImg, dataUrl: playData.songUrl });
+                    // console.info("stopMusic2")
+                    App.globalData.playing = true;
                 }
 
             }
@@ -92,11 +94,12 @@ const musicPlayer = {
     playNext() {
         let index = this.index;
         index++;
-        if (index == this.lists[listobj].length) {
+        if (index == this.lists.song.length) {
             index = this.index = 0;
         }
         this.playMusic({ lists: this.lists, index: index });
-        wx.setStorageSync("playIndex", index)
+        App.globalData.playIndex = index;
+
     },
 
     /*上一首*/
@@ -104,10 +107,11 @@ const musicPlayer = {
         let index = this.index;
         index--;
         if (index < 0) {
-            index = this.index = this.lists[listobj].length - 1;
+            index = this.index = this.lists.song.length - 1;
         }
         this.playMusic({ lists: this.lists, index: index });
-        wx.setStorageSync("playIndex", index)
+        App.globalData.playIndex = index;
+
     },
 
 
